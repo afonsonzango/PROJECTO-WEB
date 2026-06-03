@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painel do Aluno | EduMatric</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body { background: linear-gradient(-45deg,#002366,#0047ab,#001a40,#0066ff); background-size:400% 400%; animation:gradientMove 15s ease infinite; }
+@keyframes gradientMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+.glass { background:rgba(255,255,255,0.15); backdrop-filter:blur(18px); border:1px solid rgba(255,255,255,0.2); }
+</style>
+</head>
+<body class="text-white min-h-screen p-6">
+
+<header class="flex justify-between items-center mb-8 max-w-3xl mx-auto">
+    <div>
+        <h1 class="text-2xl font-black">EduMatric</h1>
+        <p class="text-blue-200 text-sm">Portal do Aluno</p>
+    </div>
+    <a href="/logout/aluno" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-semibold transition text-sm">Sair</a>
+</header>
+
+<div class="max-w-3xl mx-auto space-y-6">
+
+    <div class="glass p-6 rounded-2xl flex justify-between items-start flex-wrap gap-4">
+        <div>
+            <h2 class="text-3xl font-black"><%= aluno.nome %></h2>
+            <% if (aluno.id_oficial) { %>
+            <p class="text-blue-200 mt-1">ID Oficial: <strong class="text-white"><%= aluno.id_oficial %></strong></p>
+            <% } %>
+        </div>
+        <div>
+            <% if (aluno.estado === 'Pendente') { %>
+                <span class="bg-yellow-500/30 text-yellow-100 px-4 py-2 rounded-lg font-bold text-lg">⏳ Pendente</span>
+            <% } else if (aluno.estado === 'Aprovado') { %>
+                <span class="bg-green-500/30 text-green-100 px-4 py-2 rounded-lg font-bold text-lg">✅ Aprovado</span>
+            <% } else { %>
+                <span class="bg-red-500/30 text-red-100 px-4 py-2 rounded-lg font-bold text-lg">❌ Recusado</span>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="glass p-4 rounded-xl"><p class="text-blue-200 text-xs font-semibold mb-1">CURSO</p><p class="font-bold"><%= aluno.curso %></p></div>
+        <div class="glass p-4 rounded-xl"><p class="text-blue-200 text-xs font-semibold mb-1">CLASSE</p><p class="font-bold"><%= aluno.classe %></p></div>
+        <div class="glass p-4 rounded-xl"><p class="text-blue-200 text-xs font-semibold mb-1">PERÍODO</p><p class="font-bold"><%= aluno.periodo %></p></div>
+        <div class="glass p-4 rounded-xl"><p class="text-blue-200 text-xs font-semibold mb-1">SEXO</p><p class="font-bold"><%= aluno.sexo || '—' %></p></div>
+    </div>
+
+    <div class="glass p-6 rounded-2xl">
+        <h3 class="font-bold text-lg mb-4">Dados Pessoais</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div><p class="text-blue-200 text-xs font-semibold mb-1">EMAIL</p><p><%= aluno.email %></p></div>
+            <div><p class="text-blue-200 text-xs font-semibold mb-1">TELEFONE</p><p><%= aluno.telefone || '—' %></p></div>
+            <div><p class="text-blue-200 text-xs font-semibold mb-1">NIF</p><p><%= aluno.nif || '—' %></p></div>
+            <div><p class="text-blue-200 text-xs font-semibold mb-1">ESCOLA ANTERIOR</p><p><%= aluno.escola_anterior || '—' %></p></div>
+            <div class="md:col-span-2"><p class="text-blue-200 text-xs font-semibold mb-1">ENDEREÇO</p><p><%= aluno.endereco || '—' %></p></div>
+        </div>
+    </div>
+
+    <div class="glass p-4 rounded-xl">
+        <p class="text-blue-200 text-xs font-semibold mb-1">DATA DE CADASTRO</p>
+        <p class="font-bold"><%= new Date(aluno.data_cadastro).toLocaleDateString('pt-BR') %></p>
+    </div>
+
+    <% if (aluno.estado === 'Recusado' && aluno.mensagem_recusa) { %>
+    <div class="bg-red-500/20 border border-red-400/50 rounded-lg p-6">
+        <h4 class="font-bold mb-2 text-red-100">Motivo da Recusa</h4>
+        <p class="text-red-100"><%= aluno.mensagem_recusa %></p>
+    </div>
+    <% } %>
+
+    <% if (aluno.estado === 'Aprovado') { %>
+    <div class="bg-green-500/20 border border-green-400/50 rounded-lg p-6">
+        <p class="font-bold text-green-100 mb-2">✅ Matrícula Aprovada!</p>
+        <ul class="text-green-100 text-sm space-y-1">
+            <li>→ Efetue o pagamento das taxas (15.000 Kz)</li>
+            <li>→ Procure a secretaria para confirmação final</li>
+        </ul>
+    </div>
+    <% } %>
+
+</div>
+</body>
+</html>

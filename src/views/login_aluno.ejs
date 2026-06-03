@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Login Aluno | EduMatric</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    body { background: linear-gradient(-45deg,#002366,#0047ab,#001a40,#0066ff); background-size:400% 400%; animation:gradientMove 15s ease infinite; }
+    @keyframes gradientMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    .login-card {
+      width: 100%; max-width: 440px;
+      padding: 40px; border-radius: 20px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .login-card h2 { font-size: 1.9rem; font-weight: 700; text-align: center; margin-bottom: 28px; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-group input { padding: 12px 14px; background: white; color: #111; border: none; border-radius: 6px; font-size: 0.95rem; font-family: var(--font); outline: none; width: 100%; }
+
+    .btn-login {
+      width: 100%; padding: 13px;
+      background: white; color: #001a40;
+      font-weight: 700; font-size: 1rem;
+      border: none; border-radius: 8px;
+      cursor: pointer; transition: background 0.2s;
+      font-family: var(--font); margin-top: 8px;
+    }
+    .btn-login:hover { background: #e0e7ff; }
+
+    .login-footer { text-align: center; font-size: 0.9rem; margin-top: 20px; color: rgba(191,219,254,0.9); }
+    .login-footer a { color: white; font-weight: 700; }
+    .login-footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body class="page-center">
+  <a href="/" class="back-link">&#8592;</a>
+
+  <div class="login-card">
+    <h2>Portal do Aluno</h2>
+
+    <% if (erro) { %><div class="alert alert-error"><%= erro %></div><% } %>
+
+    <form method="POST" action="/login/aluno">
+      <div class="form-group">
+        <input type="text" name="id_oficial" placeholder="ID Oficial (ex: JOAB1234)" required>
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Email" required>
+      </div>
+      <button type="submit" class="btn-login">Entrar</button>
+    </form>
+
+    <p class="login-footer">
+      Nao tem matricula? <a href="/fazer-matricula">Faca aqui</a>
+    </p>
+  </div>
+</body>
+</html>

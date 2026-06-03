@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fazer Matricula | EduMatric</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    body { background: linear-gradient(-45deg,#002366,#0047ab,#001a40,#0066ff); background-size:400% 400%; animation:gradientMove 15s ease infinite; }
+    @keyframes gradientMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    .page-center { align-items: flex-start; padding-top: 64px; }
+
+    .form-card {
+      width: 100%; max-width: 780px; margin: 0 auto;
+      padding: 40px; border-radius: 20px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .form-card h2 { font-size: 1.9rem; font-weight: 700; text-align: center; margin-bottom: 28px; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
+    .col-2 { grid-column: span 2; }
+    @media (max-width: 640px) { .col-2 { grid-column: span 1; } }
+
+    .field label { display: block; font-size: 0.85rem; margin-bottom: 6px; color: rgba(255,255,255,0.85); }
+    .field input,
+    .field select {
+      width: 100%; padding: 11px 14px;
+      background: white; color: #111;
+      border: none; border-radius: 6px;
+      font-size: 0.95rem; font-family: var(--font);
+      outline: none;
+    }
+    .field input[type="file"] {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+    }
+
+    .btn-submit {
+      width: 100%; padding: 14px;
+      background: white; color: #001a40;
+      font-weight: 700; font-size: 1rem;
+      border: none; border-radius: 8px;
+      cursor: pointer; transition: background 0.2s;
+      font-family: var(--font);
+    }
+    .btn-submit:hover { background: #e0e7ff; }
+  </style>
+</head>
+<body class="bg-blue-gradient">
+  <a href="/" class="back-link">&#8592;</a>
+
+  <div class="page-center">
+    <div class="form-card">
+      <h2>Formulario de Matricula</h2>
+
+      <% if (erro) { %><div class="alert alert-error"><%= erro %></div><% } %>
+      <% if (sucesso) { %><div class="alert alert-success"><%= sucesso %></div><% } %>
+
+      <form method="POST" action="/fazer-matricula" enctype="multipart/form-data">
+        <div class="form-grid">
+
+          <div class="field col-2">
+            <label>Nome Completo *</label>
+            <input type="text" name="nome" placeholder="Ex: Joao Antonio Silva" required>
+          </div>
+
+          <div class="field">
+            <label>Sexo *</label>
+            <select name="sexo" required>
+              <option value="">Selecionar</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Feminino">Feminino</option>
+              <option value="Outro">Outro</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>NIF *</label>
+            <input type="text" name="nif" placeholder="Numero de identificacao" required>
+          </div>
+
+          <div class="field">
+            <label>Curso *</label>
+            <select name="curso" required>
+              <option value="">Selecionar</option>
+              <option value="Informática de Gestão">Informatica de Gestao</option>
+              <option value="Gestão Empresarial">Gestao Empresarial</option>
+              <option value="Telecomunicações">Telecomunicacoes</option>
+              <option value="Eletricidade Industrial">Eletricidade Industrial</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Classe *</label>
+            <select name="classe" required>
+              <option value="">Selecionar</option>
+              <option value="10ª">10a</option>
+              <option value="11ª">11a</option>
+              <option value="12ª">12a</option>
+              <option value="13ª">13a</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Periodo *</label>
+            <select name="periodo" required>
+              <option value="">Selecionar</option>
+              <option value="Manhã">Manha</option>
+              <option value="Tarde">Tarde</option>
+              <option value="Noite">Noite</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Contacto *</label>
+            <input type="tel" name="telefone" placeholder="+244 9XX XXX XXX" required>
+          </div>
+
+          <div class="field">
+            <label>Escola Anterior *</label>
+            <input type="text" name="escola" placeholder="Nome da escola" required>
+          </div>
+
+          <div class="field col-2">
+            <label>Email *</label>
+            <input type="email" name="email" placeholder="exemplo@email.com" required>
+          </div>
+
+          <div class="field col-2">
+            <label>Endereco <span style="opacity:0.6">(opcional)</span></label>
+            <input type="text" name="endereco" placeholder="Municipio, Rua...">
+          </div>
+
+          <div class="field col-2">
+            <label>Foto de Passe * <span style="opacity:0.5;font-size:0.8rem">(JPG/PNG, max 10MB)</span></label>
+            <input type="file" name="foto" accept=".jpg,.jpeg,.png" required>
+          </div>
+
+          <div class="field col-2">
+            <label>Certificado * <span style="opacity:0.5;font-size:0.8rem">(PDF/JPG/PNG, max 10MB)</span></label>
+            <input type="file" name="certificado" accept=".pdf,.jpg,.jpeg,.png" required>
+          </div>
+
+          <div class="field col-2">
+            <button type="submit" class="btn-submit">Enviar Matricula</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

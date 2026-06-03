@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Oficial | EduMatric</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.faq-item {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.faq-item.active {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.faq-item.active .faq-content {
+    max-height: 500px;
+}
+</style>
+</head>
+
+<body class="text-gray-800">
+
+<a href="index.html" class="absolute top-6 left-6 text-2xl text-white hover:opacity-80 z-10">←</a>
+
+<!-- HEADER HERO -->
+<div class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-16 text-center">
+    <h1 class="text-5xl font-black mb-4">📚 Central de Ajuda</h1>
+    <p class="text-xl text-blue-100">Tudo que você precisa saber sobre o EduMatric</p>
+</div>
+
+<!-- CONTEÚDO PRINCIPAL -->
+<div class="max-w-4xl mx-auto px-6 py-12">
+
+    <!-- SEÇÃO: COMO FAZER MATRÍCULA -->
+    <div class="mb-12">
+        <h2 class="text-3xl font-black text-white mb-6">🎓 Como Fazer Matrícula</h2>
+        <div class="bg-white rounded-lg shadow-lg p-8 space-y-4 text-gray-700">
+            <div class="flex gap-4">
+                <span class="text-2xl font-black text-blue-600">1</span>
+                <div>
+                    <h3 class="font-bold text-lg">Acesse o formulário</h3>
+                    <p>Clique em "Fazer Matrícula" na página inicial.</p>
+                </div>
+            </div>
+            <hr>
+            <div class="flex gap-4">
+                <span class="text-2xl font-black text-blue-600">2</span>
+                <div>
+                    <h3 class="font-bold text-lg">Preencha todos os campos obrigatórios</h3>
+                    <p>Nome, email, NIF, curso, classe e período são campos obrigatórios.</p>
+                </div>
+            </div>
+            <hr>
+            <div class="flex gap-4">
+                <span class="text-2xl font-black text-blue-600">3</span>
+                <div>
+                    <h3 class="font-bold text-lg">Faça o upload dos documentos</h3>
+                    <p>Foto de passe (JPG/PNG) e Certificado (PDF/JPG/PNG) - máximo 10MB cada.</p>
+                </div>
+            </div>
+            <hr>
+            <div class="flex gap-4">
+                <span class="text-2xl font-black text-blue-600">4</span>
+                <div>
+                    <h3 class="font-bold text-lg">Envie o formulário</h3>
+                    <p>Você receberá um ID oficial único para acompanhar sua matrícula.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEÇÃO: VERIFICAR STATUS -->
+    <div class="mb-12">
+        <h2 class="text-3xl font-black text-white mb-6">📋 Como Verificar Status</h2>
+        <div class="bg-white rounded-lg shadow-lg p-8 space-y-4 text-gray-700">
+            <p class="mb-4">Para verificar o status da sua matrícula, você precisa de:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+                <li><strong>Nome Completo</strong> - Exatamente como cadastrado</li>
+                <li><strong>Email</strong> - O email usado na inscrição</li>
+            </ul>
+            <p class="mt-6 text-sm text-gray-500">Acesse "Ver Status de Matrícula" na página inicial para verificar em tempo real.</p>
+        </div>
+    </div>
+
+    <!-- SEÇÃO: RECONFIRMAÇÃO -->
+    <div class="mb-12">
+        <h2 class="text-3xl font-black text-white mb-6">🔄 Reconfirmação de Matrícula</h2>
+        <div class="bg-white rounded-lg shadow-lg p-8 space-y-4 text-gray-700">
+            <p class="mb-4"><strong>O que é reconfirmação?</strong></p>
+            <p class="mb-6">A reconfirmação permite que você atualize seus dados após a aprovação inicial. Você pode alterar curso, classe, período e informações de contacto.</p>
+            
+            <p className="mb-4"><strong>Quem pode fazer reconfirmação?</strong></p>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-6">
+                <li>Alunos com matrícula aprovada</li>
+                <li>Alunos que desejam atualizar informações</li>
+            </ul>
+
+            <p className="mb-4"><strong>Como fazer?</strong></p>
+            <ol class="list-decimal list-inside space-y-2 ml-4">
+                <li>Acesse "Fazer Reconfirmação"</li>
+                <li>Informe seus dados pessoais</li>
+                <li>Revise e atualize as informações</li>
+                <li>Confirme a reconfirmação</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- SEÇÃO: ESTADOS DE MATRÍCULA -->
+    <div class="mb-12">
+        <h2 class="text-3xl font-black text-white mb-6">🔀 Estados de Matrícula</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-yellow-100 rounded-lg p-6 text-center">
+                <p class="text-4xl mb-3">⏳</p>
+                <h3 class="font-bold text-lg mb-2 text-yellow-900">Pendente</h3>
+                <p class="text-yellow-800 text-sm">Sua matrícula está sendo analisada pela secretaria.</p>
+            </div>
+            <div class="bg-green-100 rounded-lg p-6 text-center">
+                <p class="text-4xl mb-3">✅</p>
+                <h3 class="font-bold text-lg mb-2 text-green-900">Aprovado</h3>
+                <p class="text-green-800 text-sm">Sua matrícula foi aprovada! Procure a secretaria.</p>
+            </div>
+            <div class="bg-red-100 rounded-lg p-6 text-center">
+                <p class="text-4xl mb-3">❌</p>
+                <h3 class="font-bold text-lg mb-2 text-red-900">Recusado</h3>
+                <p class="text-red-800 text-sm">Sua matrícula foi recusada. Consulte o motivo.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEÇÃO: PERGUNTAS FREQUENTES -->
+    <div class="mb-12">
+        <h2 class="text-3xl font-black text-white mb-6">❓ Perguntas Frequentes</h2>
+        <div class="space-y-3">
+            
+            <div class="faq-item bg-white rounded-lg shadow-lg overflow-hidden" onclick="toggleFAQ(this)">
+                <div class="p-6 font-bold text-gray-800 flex justify-between items-center">
+                    <span>Qual é o período de inscrições?</span>
+                    <span class="text-2xl">+</span>
+                </div>
+                <div class="faq-content px-6 pb-6 text-gray-700">
+                    As inscrições estão abertas de janeiro a agosto de 2026. Você pode fazer sua matrícula a qualquer momento durante este período.
+                </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-lg shadow-lg overflow-hidden" onclick="toggleFAQ(this)">
+                <div class="p-6 font-bold text-gray-800 flex justify-between items-center">
+                    <span>Quanto custa a matrícula?</span>
+                    <span class="text-2xl">+</span>
+                </div>
+                <div class="faq-content px-6 pb-6 text-gray-700">
+                    <p class="mb-3">O valor da matrícula varia conforme a classe:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>10ª Classe: 50.000 Kz</li>
+                        <li>11ª e 12ª Classe: 60.000 Kz</li>
+                        <li>13ª Classe: 65.000 Kz</li>
+                    </ul>
+                    <p class="mt-3">Taxa de inscrição: 15.000 Kz</p>
+                </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-lg shadow-lg overflow-hidden" onclick="toggleFAQ(this)">
+                <div class="p-6 font-bold text-gray-800 flex justify-between items-center">
+                    <span>Preciso de quais documentos?</span>
+                    <span class="text-2xl">+</span>
+                </div>
+                <div class="faq-content px-6 pb-6 text-gray-700">
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>Foto de passe (JPG ou PNG)</li>
+                        <li>Certificado de conclusão de curso anterior (PDF, JPG ou PNG)</li>
+                        <li>Cópia do NIF</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-500">Máximo de 10MB por arquivo.</p>
+                </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-lg shadow-lg overflow-hidden" onclick="toggleFAQ(this)">
+                <div class="p-6 font-bold text-gray-800 flex justify-between items-center">
+                    <span>Como faço para recuperar meu ID oficial?</span>
+                    <span class="text-2xl">+</span>
+                </div>
+                <div class="faq-content px-6 pb-6 text-gray-700">
+                    Você pode recuperar seu ID oficial acessando "Ver Status de Matrícula" e inserindo seu nome completo e email.
+                </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-lg shadow-lg overflow-hidden" onclick="toggleFAQ(this)">
+                <div class="p-6 font-bold text-gray-800 flex justify-between items-center">
+                    <span>Posso alterar meus dados após aprovação?</span>
+                    <span class="text-2xl">+</span>
+                </div>
+                <div class="faq-content px-6 pb-6 text-gray-700">
+                    Sim! Você pode fazer uma reconfirmação de matrícula para atualizar suas informações acadêmicas (curso, classe, período) e dados de contacto.
+                </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-lg shadow-lg overflow-hidden" onclick="toggleFAQ(this)">
+                <div class="p-6 font-bold text-gray-800 flex justify-between items-center">
+                    <span>Quanto tempo leva para processar a matrícula?</span>
+                    <span class="text-2xl">+</span>
+                </div>
+                <div class="faq-content px-6 pb-6 text-gray-700">
+                    O processamento geralmente leva de 3 a 5 dias úteis. Você pode acompanhar o status a qualquer momento através do sistema.
+                </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-lg shadow-lg overflow-hidden" onclick="toggleFAQ(this)">
+                <div class="p-6 font-bold text-gray-800 flex justify-between items-center">
+                    <span>O que fazer se minha matrícula for recusada?</span>
+                    <span class="text-2xl">+</span>
+                </div>
+                <div class="faq-content px-6 pb-6 text-gray-700">
+                    Se sua matrícula for recusada, você receberá um motivo específico. Procure a secretaria para esclarecer dúvidas ou solicitar revisão da decisão.
+                </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-lg shadow-lg overflow-hidden" onclick="toggleFAQ(this)">
+                <div class="p-6 font-bold text-gray-800 flex justify-between items-center">
+                    <span>Como entro em contacto com a secretaria?</span>
+                    <span class="text-2xl">+</span>
+                </div>
+                <div class="faq-content px-6 pb-6 text-gray-700">
+                    <p class="mb-3">Você pode entrar em contacto:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>Pessoalmente na secretaria da instituição</li>
+                        <li>Por email: secretaria@edumatric.local</li>
+                        <li>Por telefone: disponível na página inicial</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SEÇÃO: INFORMAÇÕES ADICIONAIS -->
+    <div class="mb-12">
+        <h2 class="text-3xl font-black text-white mb-6">📖 Informações Adicionais</h2>
+        <div class="space-y-6">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-blue-900 mb-3">Titulo</h3>
+                <div class="text-gray-700 mb-4">
+                    hgufyvjb oiufdyu uihiygiu
+                </div>
+                <div class="flex justify-between text-xs text-gray-500">
+                    <span>Autor: Paulo</span>
+                    <span>12/06/2002</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEÇÃO: SUPORTE -->
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg shadow-lg p-12 text-center mb-12">
+        <h2 class="text-3xl font-black mb-4">🆘 Precisa de Ajuda?</h2>
+        <p class="text-lg mb-6">Se você não encontrou a resposta que procura, entre em contacto conosco.</p>
+        <div class="flex justify-center gap-4 flex-wrap">
+            <a href="index.html" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition">
+                ← Voltar ao Início
+            </a>
+            <a href="mailto:suporte@edumatric.local" class="bg-blue-700 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-800 transition">
+                📧 Enviar Email
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-blue-900 text-white py-8 mt-12">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <p class="text-sm text-blue-200">© 2026 EduMatric - Sistema de Matrículas Online</p>
+        <p class="text-xs text-blue-300 mt-2">Todos os direitos reservados</p>
+    </div>
+</footer>
+
+<script>
+function toggleFAQ(element) {
+    document.querySelectorAll('.faq-item').forEach(item => {
+        if (item !== element) {
+            item.classList.remove('active');
+            item.querySelector('.faq-item > div:first-child span:last-child').textContent = '+';
+        }
+    });
+    
+    element.classList.toggle('active');
+    const icon = element.querySelector('.faq-item > div:first-child span:last-child');
+    icon.textContent = element.classList.contains('active') ? '−' : '+';
+}
+</script>
+
+</body>
+</html>

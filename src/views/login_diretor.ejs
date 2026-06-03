@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Login Diretor | EduMatric</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    body { background: linear-gradient(-45deg,#1e3c72,#2a5298,#7e22ce,#3b82f6); background-size:400% 400%; animation:gradientShift 15s ease infinite; }
+    @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    .login-card {
+      width: 100%; max-width: 440px;
+      padding: 40px; border-radius: 20px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .card-header { text-align: center; margin-bottom: 32px; }
+    .card-header h1 { font-size: 1.9rem; font-weight: 900; }
+    .card-header p { font-size: 0.9rem; color: rgba(191,219,254,0.8); margin-top: 6px; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; }
+    .form-group input { padding: 12px 16px; font-family: var(--font); font-size: 0.95rem; }
+
+    .btn-login {
+      width: 100%; padding: 14px;
+      background: white; color: #1e3a8a;
+      font-weight: 900; font-size: 1.05rem;
+      border: none; border-radius: 10px;
+      cursor: pointer; transition: background 0.2s;
+      font-family: var(--font); margin-top: 16px;
+    }
+    .btn-login:hover { background: #dbeafe; }
+
+    .info-box {
+      margin-top: 24px; padding: 14px 16px;
+      background: rgba(59,130,246,0.2);
+      border: 1px solid rgba(59,130,246,0.4);
+      border-radius: 8px;
+      font-size: 0.8rem; color: rgba(191,219,254,0.9);
+      line-height: 1.5;
+    }
+    .info-box strong { color: white; }
+  </style>
+</head>
+<body class="page-center">
+  <a href="/" class="back-link">&#8592;</a>
+
+  <div class="login-card">
+    <div class="card-header">
+      <h1>Portal do Diretor</h1>
+      <p>Acesso Administrativo</p>
+    </div>
+
+    <% if (erro) { %><div class="alert alert-error"><%= erro %></div><% } %>
+
+    <form method="POST" action="/login/diretor">
+      <div class="form-group">
+        <label>Utilizador</label>
+        <input class="input-dark" type="text" name="usuario" value="diretor" required placeholder="diretor">
+      </div>
+      <div class="form-group">
+        <label>Senha</label>
+        <input class="input-dark" type="password" name="senha" required placeholder="Digite a sua senha">
+      </div>
+      <button type="submit" class="btn-login">Entrar no Sistema</button>
+    </form>
+
+    <div class="info-box">
+      <strong>Primeira Vez?</strong><br>
+      Digite o utilizador <strong>diretor</strong> e crie a sua senha. O sistema criara a conta automaticamente.
+    </div>
+  </div>
+</body>
+</html>

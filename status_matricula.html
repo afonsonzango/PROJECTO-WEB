@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Status da Matrícula | EduMatric</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body{
+    background: linear-gradient(-45deg, #002366, #0047ab, #001a40, #0066ff);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+}
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+.glass{
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+</style>
+</head>
+
+<body class="text-white flex items-center justify-center min-h-screen p-6">
+
+<a href="index.php" class="absolute top-6 left-6 text-2xl hover:opacity-80">←</a>
+
+<div class="glass p-8 rounded-2xl w-full max-w-2xl">
+
+<h2 class="text-3xl font-bold mb-2 text-center">Status de Matrícula</h2>
+<p class="text-center text-blue-100 text-sm mb-6">Verifique o andamento da sua inscrição</p>
+
+<form method="POST" class="space-y-4 mb-8">
+<div>
+<label class="text-sm mb-2 block font-semibold">Nome Completo</label>
+<input type="text" name="nome" placeholder="Digite seu nome completo" required class="p-3 rounded text-black w-full focus:outline-none focus:ring-2 focus:ring-white">
+</div>
+
+<div>
+<label class="text-sm mb-2 block font-semibold">Email</label>
+<input type="email" name="email" placeholder="Digite seu email" required class="p-3 rounded text-black w-full focus:outline-none focus:ring-2 focus:ring-white">
+</div>
+
+<button type="submit" class="w-full bg-white text-blue-900 p-3 rounded font-bold hover:bg-gray-100 transition">
+🔍 Verificar Status
+</button>
+</form>
+
+
+<div class="space-y-6">
+
+    <!-- CABEÇALHO COM STATUS -->
+    <div class="bg-white/10 border border-white/20 rounded-lg p-6">
+        <div class="flex items-center justify-between flex-wrap gap-4">
+            <div>
+                <h3 class="text-2xl font-bold">Paulo</h3>
+                <p class="text-blue-200 text-sm">ID Oficial: <strong>001</strong></p>
+            </div>
+            <div class="text-right">
+                    <span class="inline-block bg-yellow-500/30 text-yellow-100 px-4 py-2 rounded-lg font-bold text-lg">⏳ Pendente</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- INFORMAÇÕES ACADÊMICAS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+            <p class="text-blue-200 text-xs font-semibold mb-1">CURSO</p>
+            <p class="text-xl font-bold">Informática</p>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+            <p class="text-blue-200 text-xs font-semibold mb-1">CLASSE</p>
+            <p class="text-xl font-bold">10º</p>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+            <p class="text-blue-200 text-xs font-semibold mb-1">PERÍODO</p>
+            <p class="text-xl font-bold">Diurno</p>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+            <p class="text-blue-200 text-xs font-semibold mb-1">TELEFONE</p>
+            <p class="text-xl font-bold">102030405</p>
+        </div>
+
+    </div>
+
+    <!-- INFORMAÇÕES PESSOAIS -->
+    <div class="bg-white/5 border border-white/10 rounded-lg p-6">
+        <h4 class="font-bold text-lg mb-4">Informações Pessoais</h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div>
+                <p class="text-blue-200 text-xs font-semibold mb-1">EMAIL</p>
+                <p>Paulo@gmail.com</p>
+            </div>
+            <div>
+                <p class="text-blue-200 text-xs font-semibold mb-1">NIF</p>
+                <p>00LA01</p>
+            </div>
+            <div>
+                <p class="text-blue-200 text-xs font-semibold mb-1">SEXO</p>
+                <p>Masculino</p>
+            </div>
+            <div>
+                <p class="text-blue-200 text-xs font-semibold mb-1">ENDEREÇO</p>
+                <p>Minha casa</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- DATAS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+            <p class="text-blue-200 text-xs font-semibold mb-1">DATA DE CADASTRO</p>
+            <p class="text-lg font-bold">10/02/2021</p>
+        </div>
+    </div>
+
+    <!-- MENSAGEM DE RECUSA (se houver) -->
+    <div class="bg-red-500/20 border border-red-400/50 rounded-lg p-6">
+        <h4 class="font-bold text-lg mb-2 text-red-100">Motivo da Recusa</h4>
+        <p class="text-red-100">Aceite</p>
+    </div>
+
+    <!-- PRÓXIMOS PASSOS -->
+    <div class="bg-blue-500/20 border border-blue-400/50 rounded-lg p-6">
+        <h4 class="font-bold text-lg mb-2">Próximas Etapas</h4>
+        <?php if($dados["estado"] == "Pendente"): ?>
+        <p class="text-blue-100">
+            Sua matrícula está sendo analisada pela secretaria. Você receberá uma resposta em breve. 
+            Monitore este formulário para atualizações.
+        </p>
+        <div class="space-y-3">
+            <p class="text-green-100">✅ Parabéns! Sua matrícula foi aprovada.</p>
+            <div class="bg-white/5 border border-white/10 rounded p-4 mt-4">
+                <p class="text-xs text-blue-200 font-semibold mb-2">INSTRUÇÕES DE PAGAMENTO</p>
+                <ul class="space-y-2 text-sm">
+                    <li class="flex items-start gap-2">
+                        <span class="text-blue-300">→</span>
+                        <span>Efetue o pagamento das taxas de inscrição (15.000 Kz)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-blue-300">→</span>
+                        <span>Faça upload do comprovante de pagamento</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-blue-300">→</span>
+                        <span>Procure a secretaria para confirmação final</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- AÇÕES -->
+    <div class="flex gap-3 flex-wrap">
+        <a href="reconfirmacao_matricula.html" class="flex-1 min-w-[150px] bg-blue-600 hover:bg-blue-700 text-white p-3 rounded font-bold transition text-center">
+            🔄 Reconfirmar Dados
+        </a>
+        <a href="index.html" class="flex-1 min-w-[150px] bg-gray-600 hover:bg-gray-700 text-white p-3 rounded font-bold transition text-center">
+            ← Voltar
+        </a>
+    </div>
+
+</div>
+
+
+</div>
+
+</body>
+</html>
