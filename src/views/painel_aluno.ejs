@@ -1,86 +1,128 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Painel do Aluno | EduMatric</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-body { background: linear-gradient(-45deg,#002366,#0047ab,#001a40,#0066ff); background-size:400% 400%; animation:gradientMove 15s ease infinite; }
-@keyframes gradientMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-.glass { background:rgba(255,255,255,0.15); backdrop-filter:blur(18px); border:1px solid rgba(255,255,255,0.2); }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Painel do Aluno | EduMatric</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    body { background: linear-gradient(-45deg,#002366,#0047ab,#001a40,#0066ff); background-size:400% 400%; animation:gradientMove 15s ease infinite; min-height:100vh; }
+    @keyframes gradientMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    .topbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 32px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .topbar-brand { font-size: 1.1rem; font-weight: 800; }
+    .topbar-sub { font-size: 0.75rem; color: rgba(147,197,253,0.7); }
+    .btn-sair { padding: 8px 18px; background: rgba(220,38,38,0.7); color: white; border: none; border-radius: 8px; font-family: var(--font); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .btn-sair:hover { background: rgba(220,38,38,0.9); }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 40px 24px; }
+
+    .student-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      flex-wrap: wrap; gap: 16px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px; padding: 28px; margin-bottom: 20px;
+    }
+    .student-name { font-size: 1.8rem; font-weight: 700; }
+    .student-id { font-size: 0.85rem; color: rgba(147,197,253,0.7); margin-top: 4px; }
+    .student-id span { color: white; font-weight: 600; }
+
+    .badge-status { display: inline-block; padding: 8px 18px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; }
+    .badge-pendente  { background: rgba(234,179,8,0.25);  color: #fef08a; }
+    .badge-aprovado  { background: rgba(34,197,94,0.25);  color: #86efac; }
+    .badge-recusado  { background: rgba(239,68,68,0.25);  color: #fca5a5; }
+
+    .data-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+    @media (max-width: 600px) { .data-grid { grid-template-columns: 1fr 1fr; } }
+    .data-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; }
+    .data-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(147,197,253,0.7); margin-bottom: 4px; }
+    .data-value { font-weight: 700; font-size: 0.95rem; }
+
+    .personal-section { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    .personal-section h3 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
+    .personal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.9rem; }
+    @media (max-width: 500px) { .personal-grid { grid-template-columns: 1fr; } }
+    .personal-item .p-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(147,197,253,0.7); margin-bottom: 2px; }
+    .personal-item.full { grid-column: span 2; }
+    @media (max-width: 500px) { .personal-item.full { grid-column: span 1; } }
+
+    .notice { border-radius: 10px; padding: 18px 20px; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; }
+    .notice-reject { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+    .notice-reject h4 { color: #fca5a5; font-weight: 700; margin-bottom: 6px; }
+    .notice-reject p  { color: #fca5a5; }
+    .notice-approve { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25); color: #86efac; }
+    .notice-approve ul { margin-top: 8px; padding-left: 0; list-style: none; }
+    .notice-approve li { margin-bottom: 4px; }
+  </style>
 </head>
-<body class="text-white min-h-screen p-6">
-
-<header class="flex justify-between items-center mb-8 max-w-3xl mx-auto">
+<body>
+  <div class="topbar">
     <div>
-        <h1 class="text-2xl font-black">EduMatric</h1>
-        <p class="text-blue-200 text-sm">Portal do Aluno</p>
+      <p class="topbar-brand">EduMatric</p>
+      <p class="topbar-sub">Portal do Aluno</p>
     </div>
-    <a href="/logout/aluno" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-semibold transition text-sm">Sair</a>
-</header>
+    <a href="/logout/aluno"><button class="btn-sair" onclick="return confirm('Tem a certeza?')">Sair</button></a>
+  </div>
 
-<div class="max-w-3xl mx-auto space-y-6">
+  <div class="container">
 
-    <div class="glass p-6 rounded-2xl flex justify-between items-start flex-wrap gap-4">
-        <div>
-            <h2 class="text-3xl font-black"><%= aluno.nome %></h2>
-            <% if (aluno.id_oficial) { %>
-            <p class="text-blue-200 mt-1">ID Oficial: <strong class="text-white"><%= aluno.id_oficial %></strong></p>
-            <% } %>
-        </div>
-        <div>
-            <% if (aluno.estado === 'Pendente') { %>
-                <span class="bg-yellow-500/30 text-yellow-100 px-4 py-2 rounded-lg font-bold text-lg">⏳ Pendente</span>
-            <% } else if (aluno.estado === 'Aprovado') { %>
-                <span class="bg-green-500/30 text-green-100 px-4 py-2 rounded-lg font-bold text-lg">✅ Aprovado</span>
-            <% } else { %>
-                <span class="bg-red-500/30 text-red-100 px-4 py-2 rounded-lg font-bold text-lg">❌ Recusado</span>
-            <% } %>
-        </div>
+    <div class="student-header">
+      <div>
+        <p class="student-name"><%= aluno.nome %></p>
+        <% if (aluno.id_oficial) { %>
+        <p class="student-id">ID Oficial: <span><%= aluno.id_oficial %></span></p>
+        <% } %>
+      </div>
+      <% if (aluno.estado === 'Pendente') { %>
+        <span class="badge-status badge-pendente">Em analise</span>
+      <% } else if (aluno.estado === 'Aprovado') { %>
+        <span class="badge-status badge-aprovado">Aprovado</span>
+      <% } else { %>
+        <span class="badge-status badge-recusado">Recusado</span>
+      <% } %>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="glass p-4 rounded-xl"><p class="text-blue-200 text-xs font-semibold mb-1">CURSO</p><p class="font-bold"><%= aluno.curso %></p></div>
-        <div class="glass p-4 rounded-xl"><p class="text-blue-200 text-xs font-semibold mb-1">CLASSE</p><p class="font-bold"><%= aluno.classe %></p></div>
-        <div class="glass p-4 rounded-xl"><p class="text-blue-200 text-xs font-semibold mb-1">PERÍODO</p><p class="font-bold"><%= aluno.periodo %></p></div>
-        <div class="glass p-4 rounded-xl"><p class="text-blue-200 text-xs font-semibold mb-1">SEXO</p><p class="font-bold"><%= aluno.sexo || '—' %></p></div>
+    <div class="data-grid">
+      <div class="data-box"><p class="data-label">Curso</p><p class="data-value"><%= aluno.curso %></p></div>
+      <div class="data-box"><p class="data-label">Classe</p><p class="data-value"><%= aluno.classe %></p></div>
+      <div class="data-box"><p class="data-label">Periodo</p><p class="data-value"><%= aluno.periodo %></p></div>
+      <div class="data-box"><p class="data-label">Sexo</p><p class="data-value"><%= aluno.sexo || '—' %></p></div>
     </div>
 
-    <div class="glass p-6 rounded-2xl">
-        <h3 class="font-bold text-lg mb-4">Dados Pessoais</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div><p class="text-blue-200 text-xs font-semibold mb-1">EMAIL</p><p><%= aluno.email %></p></div>
-            <div><p class="text-blue-200 text-xs font-semibold mb-1">TELEFONE</p><p><%= aluno.telefone || '—' %></p></div>
-            <div><p class="text-blue-200 text-xs font-semibold mb-1">NIF</p><p><%= aluno.nif || '—' %></p></div>
-            <div><p class="text-blue-200 text-xs font-semibold mb-1">ESCOLA ANTERIOR</p><p><%= aluno.escola_anterior || '—' %></p></div>
-            <div class="md:col-span-2"><p class="text-blue-200 text-xs font-semibold mb-1">ENDEREÇO</p><p><%= aluno.endereco || '—' %></p></div>
-        </div>
+    <div class="personal-section">
+      <h3>Dados Pessoais</h3>
+      <div class="personal-grid">
+        <div class="personal-item"><p class="p-label">Email</p><p><%= aluno.email %></p></div>
+        <div class="personal-item"><p class="p-label">Telefone</p><p><%= aluno.telefone || '—' %></p></div>
+        <div class="personal-item"><p class="p-label">NIF</p><p><%= aluno.nif || '—' %></p></div>
+        <div class="personal-item"><p class="p-label">Escola Anterior</p><p><%= aluno.escola_anterior || '—' %></p></div>
+        <div class="personal-item full"><p class="p-label">Endereco</p><p><%= aluno.endereco || '—' %></p></div>
+      </div>
     </div>
 
-    <div class="glass p-4 rounded-xl">
-        <p class="text-blue-200 text-xs font-semibold mb-1">DATA DE CADASTRO</p>
-        <p class="font-bold"><%= new Date(aluno.data_cadastro).toLocaleDateString('pt-BR') %></p>
+    <div class="data-box" style="margin-bottom:20px">
+      <p class="data-label">Data de Cadastro</p>
+      <p class="data-value"><%= new Date(aluno.data_cadastro).toLocaleDateString('pt-BR') %></p>
     </div>
 
     <% if (aluno.estado === 'Recusado' && aluno.mensagem_recusa) { %>
-    <div class="bg-red-500/20 border border-red-400/50 rounded-lg p-6">
-        <h4 class="font-bold mb-2 text-red-100">Motivo da Recusa</h4>
-        <p class="text-red-100"><%= aluno.mensagem_recusa %></p>
+    <div class="notice notice-reject">
+      <h4>Motivo da Recusa</h4>
+      <p><%= aluno.mensagem_recusa %></p>
     </div>
     <% } %>
 
     <% if (aluno.estado === 'Aprovado') { %>
-    <div class="bg-green-500/20 border border-green-400/50 rounded-lg p-6">
-        <p class="font-bold text-green-100 mb-2">✅ Matrícula Aprovada!</p>
-        <ul class="text-green-100 text-sm space-y-1">
-            <li>→ Efetue o pagamento das taxas (15.000 Kz)</li>
-            <li>→ Procure a secretaria para confirmação final</li>
-        </ul>
+    <div class="notice notice-approve">
+      <strong>Matricula Aprovada!</strong>
+      <ul>
+        <li>→ Efectue o pagamento das taxas (15.000 Kz)</li>
+        <li>→ Dirija-se a secretaria para confirmacao final</li>
+      </ul>
     </div>
     <% } %>
 
-</div>
+  </div>
 </body>
 </html>

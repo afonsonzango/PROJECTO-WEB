@@ -1,124 +1,161 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Status da Matrícula | EduMatric</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-body { background: linear-gradient(-45deg,#002366,#0047ab,#001a40,#0066ff); background-size:400% 400%; animation:gradientMove 15s ease infinite; }
-@keyframes gradientMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-.glass { background:rgba(255,255,255,0.15); backdrop-filter:blur(18px); border:1px solid rgba(255,255,255,0.2); }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Status da Matricula | EduMatric</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    body { background: linear-gradient(-45deg,#002366,#0047ab,#001a40,#0066ff); background-size:400% 400%; animation:gradientMove 15s ease infinite; }
+    @keyframes gradientMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    .page-center { align-items: flex-start; padding-top: 64px; }
+
+    .status-card {
+      width: 100%; max-width: 680px; margin: 0 auto;
+      padding: 40px; border-radius: 20px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .status-card h2 { font-size: 1.9rem; font-weight: 700; text-align: center; margin-bottom: 6px; }
+    .status-card .subtitle { text-align: center; color: rgba(191,219,254,0.7); font-size: 0.9rem; margin-bottom: 28px; }
+
+    .search-form { margin-bottom: 32px; }
+    .search-form .form-group { margin-bottom: 14px; }
+    .search-form label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; }
+    .search-form input { width: 100%; padding: 11px 14px; background: white; color: #111; border: none; border-radius: 6px; font-size: 0.95rem; font-family: var(--font); outline: none; }
+    .btn-search { width: 100%; padding: 13px; background: white; color: #001a40; font-weight: 700; font-size: 1rem; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; font-family: var(--font); }
+    .btn-search:hover { background: #e0e7ff; }
+
+    /* Result sections */
+    .result-header { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 24px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; }
+    .result-name { font-size: 1.5rem; font-weight: 700; }
+    .result-id { font-size: 0.85rem; color: rgba(191,219,254,0.7); margin-top: 4px; }
+    .result-id span { color: white; font-weight: 600; }
+
+    .badge-status { display: inline-block; padding: 8px 18px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; }
+    .badge-pendente  { background: rgba(234,179,8,0.25);  color: #fef08a; }
+    .badge-aprovado  { background: rgba(34,197,94,0.25);  color: #86efac; }
+    .badge-recusado  { background: rgba(239,68,68,0.25);  color: #fca5a5; }
+
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    @media (max-width: 500px) { .info-grid { grid-template-columns: 1fr; } }
+    .info-box-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 14px; }
+    .info-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(147,197,253,0.8); margin-bottom: 4px; }
+    .info-value { font-size: 1.1rem; font-weight: 700; }
+
+    .info-section { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+    .info-section h4 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
+    .info-section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.9rem; }
+    .info-section-grid .sub-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(147,197,253,0.8); margin-bottom: 2px; }
+
+    .result-note { border-radius: 10px; padding: 20px; margin-bottom: 16px; font-size: 0.9rem; line-height: 1.6; }
+    .note-reject { background: rgba(239,68,68,0.15);  border: 1px solid rgba(239,68,68,0.3);  }
+    .note-reject h4  { color: #fca5a5; margin-bottom: 8px; font-weight: 700; }
+    .note-reject p   { color: #fca5a5; }
+    .note-approve { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); }
+    .note-approve p  { color: #93c5fd; }
+    .note-approve ul { margin-top: 10px; padding-left: 0; list-style: none; }
+    .note-approve li { color: #93c5fd; margin-bottom: 6px; }
+    .note-pending { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); }
+    .note-pending p  { color: #93c5fd; }
+
+    .result-actions { display: flex; gap: 12px; }
+    .btn-back { flex: 1; padding: 12px; background: rgba(107,114,128,0.5); color: white; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; font-family: var(--font); font-size: 0.95rem; text-align: center; }
+    .btn-back:hover { background: rgba(107,114,128,0.7); }
+  </style>
 </head>
-<body class="text-white flex items-center justify-center min-h-screen p-6">
-<a href="/" class="absolute top-6 left-6 text-2xl hover:opacity-80 transition">←</a>
+<body class="bg-blue-gradient">
+  <a href="/" class="back-link">&#8592;</a>
 
-<div class="glass p-8 rounded-2xl w-full max-w-2xl my-12">
-<h2 class="text-3xl font-bold mb-2 text-center">Status de Matrícula</h2>
-<p class="text-center text-blue-100 text-sm mb-6">Verifique o andamento da sua inscrição</p>
+  <div class="page-center">
+    <div class="status-card">
+      <h2>Status de Matricula</h2>
+      <p class="subtitle">Verifique o andamento da sua inscricao</p>
 
-<form method="POST" action="/status-matricula" class="space-y-4 mb-8">
-    <div>
-        <label class="text-sm mb-2 block font-semibold">Nome Completo</label>
-        <input type="text" name="nome" placeholder="Digite o seu nome completo" required class="p-3 rounded text-black w-full focus:outline-none">
-    </div>
-    <div>
-        <label class="text-sm mb-2 block font-semibold">Email</label>
-        <input type="email" name="email" placeholder="Digite o seu email" required class="p-3 rounded text-black w-full focus:outline-none">
-    </div>
-    <button type="submit" class="w-full bg-white text-blue-900 p-3 rounded font-bold hover:bg-gray-100 transition">Verificar Status</button>
-</form>
+      <div class="search-form">
+        <form method="POST" action="/status-matricula">
+          <div class="form-group">
+            <label>Nome Completo</label>
+            <input type="text" name="nome" placeholder="Digite o seu nome completo" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Email usado na candidatura" required>
+          </div>
+          <button type="submit" class="btn-search">Verificar Status</button>
+        </form>
+      </div>
 
-<% if (erro) { %>
-<div class="p-4 bg-red-500/30 border border-red-400 rounded text-red-100 text-sm"><%= erro %></div>
-<% } %>
+      <% if (erro) { %><div class="alert alert-error"><%= erro %></div><% } %>
 
-<% if (aluno) { %>
-<div class="space-y-6">
-    <div class="bg-white/10 border border-white/20 rounded-lg p-6">
-        <div class="flex items-center justify-between flex-wrap gap-4">
-            <div>
-                <h3 class="text-2xl font-bold"><%= aluno.nome %></h3>
-                <% if (aluno.id_oficial) { %>
-                <p class="text-blue-200 text-sm">ID Oficial: <strong><%= aluno.id_oficial %></strong></p>
-                <% } %>
-            </div>
-            <div>
-                <% if (aluno.estado === 'Pendente') { %>
-                    <span class="inline-block bg-yellow-500/30 text-yellow-100 px-4 py-2 rounded-lg font-bold">Em análise</span>
-                <% } else if (aluno.estado === 'Aprovado') { %>
-                    <span class="inline-block bg-green-500/30 text-green-100 px-4 py-2 rounded-lg font-bold">Aprovado</span>
-                <% } else { %>
-                    <span class="inline-block bg-red-500/30 text-red-100 px-4 py-2 rounded-lg font-bold">Recusado</span>
-                <% } %>
-            </div>
+      <% if (aluno) { %>
+
+        <div class="result-header">
+          <div>
+            <p class="result-name"><%= aluno.nome %></p>
+            <% if (aluno.id_oficial) { %>
+            <p class="result-id">ID Oficial: <span><%= aluno.id_oficial %></span></p>
+            <% } %>
+          </div>
+          <% if (aluno.estado === 'Pendente') { %>
+            <span class="badge-status badge-pendente">Em analise</span>
+          <% } else if (aluno.estado === 'Aprovado') { %>
+            <span class="badge-status badge-aprovado">Aprovado</span>
+          <% } else { %>
+            <span class="badge-status badge-recusado">Recusado</span>
+          <% } %>
         </div>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="bg-white/5 border border-white/10 rounded-lg p-4">
-            <p class="text-blue-200 text-xs font-semibold mb-1">CURSO</p>
-            <p class="text-xl font-bold"><%= aluno.curso %></p>
+        <div class="info-grid">
+          <div class="info-box-item"><p class="info-label">Curso</p><p class="info-value"><%= aluno.curso %></p></div>
+          <div class="info-box-item"><p class="info-label">Classe</p><p class="info-value"><%= aluno.classe %></p></div>
+          <div class="info-box-item"><p class="info-label">Periodo</p><p class="info-value"><%= aluno.periodo %></p></div>
+          <div class="info-box-item"><p class="info-label">Telefone</p><p class="info-value"><%= aluno.telefone || '—' %></p></div>
         </div>
-        <div class="bg-white/5 border border-white/10 rounded-lg p-4">
-            <p class="text-blue-200 text-xs font-semibold mb-1">CLASSE</p>
-            <p class="text-xl font-bold"><%= aluno.classe %></p>
+
+        <div class="info-section">
+          <h4>Informacoes Pessoais</h4>
+          <div class="info-section-grid">
+            <div><p class="sub-label">Email</p><p><%= aluno.email %></p></div>
+            <div><p class="sub-label">NIF</p><p><%= aluno.nif || '—' %></p></div>
+            <div><p class="sub-label">Sexo</p><p><%= aluno.sexo || '—' %></p></div>
+            <div><p class="sub-label">Data de Cadastro</p><p><%= new Date(aluno.data_cadastro).toLocaleDateString('pt-BR') %></p></div>
+          </div>
         </div>
-        <div class="bg-white/5 border border-white/10 rounded-lg p-4">
-            <p class="text-blue-200 text-xs font-semibold mb-1">PERÍODO</p>
-            <p class="text-xl font-bold"><%= aluno.periodo %></p>
+
+        <% if (aluno.estado === 'Recusado' && aluno.mensagem_recusa) { %>
+        <div class="result-note note-reject">
+          <h4>Motivo da Recusa</h4>
+          <p><%= aluno.mensagem_recusa %></p>
         </div>
-        <div class="bg-white/5 border border-white/10 rounded-lg p-4">
-            <p class="text-blue-200 text-xs font-semibold mb-1">TELEFONE</p>
-            <p class="text-xl font-bold"><%= aluno.telefone || '—' %></p>
+        <% } %>
+
+        <% if (aluno.estado === 'Aprovado') { %>
+        <div class="result-note note-approve">
+          <p><strong>Matricula Aprovada!</strong> Siga os proximos passos:</p>
+          <ul>
+            <li>→ Efectue o pagamento das taxas de inscricao (15.000 Kz)</li>
+            <li>→ Faca upload do comprovante de pagamento</li>
+            <li>→ Dirija-se a secretaria para confirmacao final</li>
+          </ul>
         </div>
-    </div>
+        <% } %>
 
-    <div class="bg-white/5 border border-white/10 rounded-lg p-6">
-        <h4 class="font-bold text-lg mb-4">Informações Pessoais</h4>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div><p class="text-blue-200 text-xs font-semibold mb-1">EMAIL</p><p><%= aluno.email %></p></div>
-            <div><p class="text-blue-200 text-xs font-semibold mb-1">NIF</p><p><%= aluno.nif || '—' %></p></div>
-            <div><p class="text-blue-200 text-xs font-semibold mb-1">SEXO</p><p><%= aluno.sexo || '—' %></p></div>
-            <div><p class="text-blue-200 text-xs font-semibold mb-1">ENDEREÇO</p><p><%= aluno.endereco || '—' %></p></div>
+        <% if (aluno.estado === 'Pendente') { %>
+        <div class="result-note note-pending">
+          <p>A sua matricula esta a ser analisada pela secretaria. Volte em breve para actualizacoes.</p>
         </div>
-    </div>
+        <% } %>
 
-    <div class="bg-white/5 border border-white/10 rounded-lg p-4">
-        <p class="text-blue-200 text-xs font-semibold mb-1">DATA DE CADASTRO</p>
-        <p class="text-lg font-bold"><%= new Date(aluno.data_cadastro).toLocaleDateString('pt-BR') %></p>
-    </div>
+        <div class="result-actions">
+          <a href="/" class="btn-back">Voltar ao inicio</a>
+        </div>
 
-    <% if (aluno.estado === 'Recusado' && aluno.mensagem_recusa) { %>
-    <div class="bg-red-500/20 border border-red-400/50 rounded-lg p-6">
-        <h4 class="font-bold text-lg mb-2 text-red-100">Motivo da Recusa</h4>
-        <p class="text-red-100"><%= aluno.mensagem_recusa %></p>
+      <% } %>
     </div>
-    <% } %>
-
-    <% if (aluno.estado === 'Aprovado') { %>
-    <div class="bg-blue-500/20 border border-blue-400/50 rounded-lg p-6">
-        <p class="text-green-100 font-semibold mb-3">Parabéns! A sua matrícula foi aprovada.</p>
-        <ul class="space-y-2 text-sm text-blue-100">
-            <li>→ Efectue o pagamento das taxas de inscrição (15.000 Kz)</li>
-            <li>→ Faça upload do comprovante de pagamento</li>
-            <li>→ Dirija-se à secretaria para confirmação final</li>
-        </ul>
-    </div>
-    <% } %>
-
-    <% if (aluno.estado === 'Pendente') { %>
-    <div class="bg-blue-500/20 border border-blue-400/50 rounded-lg p-6">
-        <p class="text-blue-100">A sua matrícula está a ser analisada pela secretaria. Volte em breve para ver actualizações.</p>
-    </div>
-    <% } %>
-
-    <div class="flex gap-3">
-        <a href="/" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white p-3 rounded font-bold transition text-center">Voltar</a>
-    </div>
-</div>
-<% } %>
-</div>
+  </div>
 </body>
 </html>
