@@ -6,7 +6,6 @@
   <title>Painel do Diretor | EduMatric</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/main.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body { background: #0f172a; font-family: var(--font); min-height: 100vh; }
 
@@ -51,13 +50,6 @@
     .stat-yellow { background: linear-gradient(135deg, #d97706, #b45309); }
     .stat-green  { background: linear-gradient(135deg, #16a34a, #15803d); }
     .stat-red    { background: linear-gradient(135deg, #dc2626, #b91c1c); }
-
-    /* Charts */
-    .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
-    @media (max-width: 700px) { .charts-grid { grid-template-columns: 1fr; } }
-    .chart-card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; }
-    .chart-card h3 { font-size: 0.95rem; font-weight: 700; color: white; margin-bottom: 16px; }
-    .chart-wrap { height: 220px; }
 
     /* Metrics */
     .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -120,18 +112,6 @@
       <div class="stat-card stat-red">   <p class="stat-label">Recusados</p> <p class="stat-num"><%= stats.recusados %></p></div>
     </div>
 
-    <!-- Charts -->
-    <div class="charts-grid">
-      <div class="chart-card">
-        <h3>Distribuicao por Estado</h3>
-        <div class="chart-wrap"><canvas id="graficoPizza"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <h3>Resumo Numerico</h3>
-        <div class="chart-wrap"><canvas id="graficoBarras"></canvas></div>
-      </div>
-    </div>
-
     <!-- Metrics -->
     <div class="metrics-grid">
       <div class="metric-card">
@@ -149,34 +129,5 @@
     </div>
 
   </main>
-
-  <script>
-    new Chart(document.getElementById('graficoPizza').getContext('2d'), {
-      type: 'doughnut',
-      data: {
-        labels: ['Pendentes','Aprovados','Recusados'],
-        datasets: [{ backgroundColor: ['#d97706','#16a34a','#dc2626'], data: [<%= stats.pendentes %>,<%= stats.aprovados %>,<%= stats.recusados %>] }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { labels: { color: '#94a3b8' } } }
-      }
-    });
-    new Chart(document.getElementById('graficoBarras').getContext('2d'), {
-      type: 'bar',
-      data: {
-        labels: ['Pendentes','Aprovados','Recusados'],
-        datasets: [{ label: 'Alunos', backgroundColor: ['#d97706','#16a34a','#dc2626'], data: [<%= stats.pendentes %>,<%= stats.aprovados %>,<%= stats.recusados %>] }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { labels: { color: '#94a3b8' } } },
-        scales: {
-          y: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' } },
-          x: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' } }
-        }
-      }
-    });
-  </script>
 </body>
 </html>
