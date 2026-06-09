@@ -12,6 +12,7 @@
   --primary: #0052cc;
   --secondary: #00d4ff;
   --bg-dark: #001a40;
+  --bg-blue: #0047ab;
   --white: #ffffff;
   --font: 'Outfit', sans-serif;
 }
@@ -32,29 +33,10 @@ a { text-decoration: none; color: inherit; }
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* ---- Gradient backgrounds ---- */
-.bg-blue-gradient {
-  background: linear-gradient(-45deg, #002366, #0047ab, #001a40, #0066ff);
-  background-size: 400% 400%;
-  animation: gradientMove 15s ease infinite;
-}
-
+/* ---- Solid backgrounds ---- */
+.bg-blue-gradient,
 .bg-purple-gradient {
-  background: linear-gradient(-45deg, #1e3c72, #2a5298, #7e22ce, #3b82f6);
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
-}
-
-@keyframes gradientMove {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes gradientShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  background: var(--bg-blue);
 }
 
 /* ---- Buttons ---- */
